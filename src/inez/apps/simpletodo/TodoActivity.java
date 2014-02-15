@@ -10,6 +10,7 @@ import org.apache.commons.io.FileUtils;
 import android.os.Bundle;
 import android.provider.MediaStore.Files;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
@@ -19,6 +20,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class TodoActivity extends Activity {
 
@@ -54,6 +56,9 @@ public class TodoActivity extends Activity {
     	itemsAdapter.add(etNewItem.getText().toString());
     	saveItems();
     	etNewItem.setText("");
+
+		Toast toast = Toast.makeText(getApplicationContext(), "Item added!", Toast.LENGTH_SHORT);
+		toast.show();
     }
     
     private void setupListViewListener() {
@@ -63,6 +68,9 @@ public class TodoActivity extends Activity {
     			items.remove(pos);
     			itemsAdapter.notifyDataSetInvalidated();
     			saveItems();
+
+    			Toast toast = Toast.makeText(getApplicationContext(), "Item deleted!", Toast.LENGTH_SHORT);
+    			toast.show();
     			return true;
     		}
     		
@@ -110,6 +118,8 @@ public class TodoActivity extends Activity {
     		items.set(position, text);
     		itemsAdapter.notifyDataSetInvalidated();
     		saveItems();
+    		Toast toast = Toast.makeText(getApplicationContext(), "Item modified!", Toast.LENGTH_SHORT);
+    		toast.show();
     	}
     }
     
